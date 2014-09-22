@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>#define helper</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/layout.css">
+	<link rel="stylesheet" type="text/css" href="css/ui.css">
+	<link type="text/plain" href="sample-data.txt">
+	<link rel="stylesheet" href="lib/highlight/styles/default.css">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="lib/highlight/highlight.pack.js"></script>
+	<script src="js/generator.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript">
+
+	var isJSONValid = false;
+	var validateTexArea = function(text, elem){
+	var exportArea = $("#export");
+
+		if (text.length==0) {
+			console.log("clearig...");
+			elem.removeClass("textarea_valid");
+			elem.removeClass("textarea_invalid");
+			window.isJSONValid=false;
+			return 0;	
+		}
+		try {
+        	var theJson = jQuery.parseJSON(text);
+        	elem.addClass("textarea_valid");
+        	window.isJSONValid=true;
+        	console.log("valid");
+    	}
+    	catch (e) {
+    		window.isJSONValid=false;
+	        elem.addClass("textarea_invalid");
+        	console.log("invalid");
+	    }
+
+	}
+	
+</script>
+	<script>
+	$(document).ready(function(){
+	var exportArea = $("#export");
+	var txtPasteArea = $("#nls-paste-text-area");
+	var btnGenerate = $("#button_generate");
+	
+	exportArea.hide();
+	// exportArea.attr("hidden", true);
+	 
+
+//temp method ***************
+	/*
+	Text field validator
+	*/
+		
+		
+		txtPasteArea.bind('paste', function(e) {
+	    	var elem = $(this);
+	    	setTimeout(validateTexArea(elem.val(), elem), 10);
+	    	
+		});
+		
+		txtPasteArea.on('input',function(){
+	    	var elem = $(this);
+	    	validateTexArea(elem.val(), elem)
+		});
+
+		$("#button_go").click(function(){
+			var textURL = $("#dialog-message-email-left2");
+			alert(textURL.val());
+				if (textURL.val()!=null) {
+					$.get(textURL.val(), function(data) {
+			  	 		var jsonPretty = JSON.stringify(data, null, '\t');
+			  	 		txtPasteArea.val(jsonPretty);
+			  	 		validateTexArea(txtPasteArea.val(), txtPasteArea)		
+			  	 	});
+				}else{
+					textURL.fadeOut(90).fadeIn(90).fadeOut(100).fadeIn(40);;
+				}
+			});
+	/*
+	Generate Button handler
+	*/
+
+		
+		btnGenerate.click(function(){
+
+		// $("#outputfile").text ("Generating...");
+		if (isJSONValid==false) {
+			txtPasteArea.fadeOut(90).fadeIn(90).fadeOut(100).fadeIn(40);;
+		}else{
+			// /$("outputfile")
+			// console.log("text: "+ txtPasteArea.val());
+			var filename= $("#export_info textarea:first").val();;
+			var prefix= $("#export_info textarea:last").val();;
+			// alert(prefix);
+				
+			writeMacrosOnDiv($("#outputfile"), txtPasteArea.val(), prefix,  function(){
+				exportArea.fadeIn(700, function(){
+					exportArea.show();
+					//var link = dl(filename);
+					// exportArea.innerHTML();
+					// document.body.appendChild(dl(filename + ".h"));
+					$( "#export" ).replaceWith( dl(filename));
+
+				});
+				
+    	});	
+			
+		}
+		
+	});
+	
+	function dl(filename){
+		var stringFile = $("#outputfile").text();
+		var b=document.createElement('a');
+		b.download=filename + ".h";
+		b.textContent=filename + ".h";;
+		b.href='data:application/.h;base64,'+window.btoa(unescape(encodeURIComponent(stringFile)));
+		return b
+	}
+var download = function () {
+    var link = document.getElementById('downloadlink');
+    link.href = makeTextFile($("outputfile").innerHTML);
+    link.style.display = 'block';
+  }
+    
+	});
+	</script>
+</head>
+<body>
+	<div id="header">
+	<h1> " Macro file generator" by Gaurav</h1>
+	</div>
+
+
+	<div id = "nav">
+		Nav
+	</div>
+
+	<div id="section">
+		<div id ='left'>
+			<div id = "titleBar">
+				Your file will be generated below
+			</div>
+
+		<textarea placeholder = "Paste URL here..."	id="dialog-message-email-left2" class="textURL"></textarea>
+		<button id= "button_go" class="nls-button">Get</button>
+
+		<textarea placeholder = "Or paste your JSON response here..."	id="nls-paste-text-area" rows="20"></textarea>
+		</div>
+
+		<div id ="right">
+			<button id="button_generate" class="nls-button"> 
+				Generate Macros
+			</button>
+<div id="section">
+	<div id = "export_info">
+		<textarea placeholder = "File Name"	id="dialog-message-email-left"></textarea>
+		<textarea placeholder = "Prefix. Eg: k, fb, fs"	id="dialog-message-email"></textarea>
+	</div>		
+	<div id = "export">
+	<a >
+		
+	</a>
+	</div>		
+<pre>
+<code class="objective-c">
+<div id ="outputfile">//code here <ul></ul>></div>
+</code>
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
