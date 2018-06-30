@@ -22,7 +22,7 @@
 			elem.removeClass("textarea_valid");
 			elem.removeClass("textarea_invalid");
 			window.isJSONValid=false;
-			return 0;	
+			return 0;
 		}
 		try {
         	var theJson = jQuery.parseJSON(text);
@@ -37,30 +37,30 @@
 	    }
 
 	}
-	
+
 </script>
 	<script>
 	$(document).ready(function(){
 	var exportArea = $("#export");
 	var txtPasteArea = $("#nls-paste-text-area");
 	var btnGenerate = $("#button_generate");
-	
+
 	exportArea.hide();
 	// exportArea.attr("hidden", true);
-	 
+
 
 //temp method ***************
 	/*
 	Text field validator
 	*/
-		
-		
+
+
 		txtPasteArea.bind('paste', function(e) {
 	    	var elem = $(this);
 	    	setTimeout(validateTexArea(elem.val(), elem), 10);
-	    	
+
 		});
-		
+
 		txtPasteArea.on('input',function(){
 	    	var elem = $(this);
 	    	validateTexArea(elem.val(), elem)
@@ -73,7 +73,7 @@
 					$.get(textURL.val(), function(data) {
 			  	 		var jsonPretty = JSON.stringify(data, null, '\t');
 			  	 		txtPasteArea.val(jsonPretty);
-			  	 		validateTexArea(txtPasteArea.val(), txtPasteArea)		
+			  	 		validateTexArea(txtPasteArea.val(), txtPasteArea)
 			  	 	});
 				}else{
 					textURL.fadeOut(90).fadeIn(90).fadeOut(100).fadeIn(40);;
@@ -83,7 +83,7 @@
 	Generate Button handler
 	*/
 
-		
+
 		btnGenerate.click(function(){
 
 		// $("#outputfile").text ("Generating...");
@@ -95,7 +95,7 @@
 			var filename= $("#export_info textarea:first").val();;
 			var prefix= $("#export_info textarea:last").val();;
 			// alert(prefix);
-				
+
 			writeMacrosOnDiv($("#outputfile"), txtPasteArea.val(), prefix,  function(){
 				exportArea.fadeIn(700, function(){
 					exportArea.show();
@@ -105,13 +105,13 @@
 					$( "#export" ).replaceWith( dl(filename));
 
 				});
-				
-    	});	
-			
+
+    	});
+
 		}
-		
+
 	});
-	
+
 	function dl(filename){
 		var stringFile = $("#outputfile").text();
 		var b=document.createElement('a');
@@ -125,13 +125,14 @@ var download = function () {
     link.href = makeTextFile($("outputfile").innerHTML);
     link.style.display = 'block';
   }
-    
+
 	});
 	</script>
 </head>
 <body>
 	<div id="header">
 	<h1> " Macro file generator" by Gaurav</h1>
+	<br/>
 	</div>
 
 
@@ -152,19 +153,19 @@ var download = function () {
 		</div>
 
 		<div id ="right">
-			<button id="button_generate" class="nls-button"> 
+			<button id="button_generate" class="nls-button">
 				Generate Macros
 			</button>
 <div id="section">
 	<div id = "export_info">
 		<textarea placeholder = "File Name"	id="dialog-message-email-left"></textarea>
 		<textarea placeholder = "Prefix. Eg: k, fb, fs"	id="dialog-message-email"></textarea>
-	</div>		
+	</div>
 	<div id = "export">
 	<a >
-		
+
 	</a>
-	</div>		
+	</div>
 <pre>
 <code class="objective-c">
 <div id ="outputfile">//code here <ul></ul>></div>
