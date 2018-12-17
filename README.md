@@ -2,7 +2,11 @@
 ![JS](https://img.shields.io/badge/Language-HTML-blue.svg?style=for-the-badge)
 
 # MacroFileGenerator
-A handy tool that helped generating constants files with keys from a json.
+Long ago, in the era off ObjC and a when I had an obsesion with naming every tiny string in the code especially when it was coming rom backend.
+
+Manually parsing each response and seperate the keys and then create the macro rom it was a boring and mechanical task. And as this was becoming more a team practice, more people were doing mechanical tasks.
+
+So I developed (actually Google and muyself developed) a handy tool that helped generating constants files with keys from a json.
 
 
 ## Input 
