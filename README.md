@@ -2,11 +2,11 @@
 ![JS](https://img.shields.io/badge/Language-HTML-blue.svg?style=for-the-badge)
 
 # MacroFileGenerator
-Long ago, in the era off ObjC and a when I had an obsesion with naming every tiny string in the code especially when it was coming rom backend.
+Long ago, in the era of ObjC and a when I had an obsesion with naming every tiny string in the code especially when it was coming from backend.
 
-Manually parsing each response and seperate the keys and then create the macro rom it was a boring and mechanical task. And as this was becoming more a team practice, more people were doing mechanical tasks.
+Manually parsing each response and seperate the keys and then create the macro from it was a boring and mechanical task. And as this was becoming more a team practice, more people were doing this mechanical task.
 
-So I developed (actually Google and muyself developed) a handy tool that helped generating constants files with keys from a json.
+So I developed a handy tool that helped generating macro-constants files with keys from a json.
 
 
 ## Input 
@@ -14,7 +14,7 @@ So I developed (actually Google and muyself developed) a handy tool that helped 
 - URL
 
 ## Output
-- .h file with constants derived from keys in the input json
+- `.h` file with constants derived from keys in the input json
 
 
 ## Screenshots
